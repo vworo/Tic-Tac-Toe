@@ -20,4 +20,6 @@ h1 {
     border: solid;
     box-sizing: border-box;
     margin: 0;
+    text-align: center;
+    background-color: white;
 }
