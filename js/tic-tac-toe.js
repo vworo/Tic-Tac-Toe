@@ -34,10 +34,12 @@ const gameInput = function (gridLocation) {
             gameGrid[row][col] = 'x';
             gameCurrentTurn = 'PLAYER2';
             gameMessage = 'PLAYER 2, you know what to do!';
+            gameTurnCounter++;
         } else {
             gameGrid[row][col] = 'o';
             gameCurrentTurn = 'PLAYER1';
             gameMessage = 'PLAYER 1, have some fun!';
+            gameTurnCounter++;
         }
     }
 
@@ -50,6 +52,11 @@ const checkWin = function () {
     // *** UNDER CONSTRUCTION ***
     for (let i = 0; i <= gameGrid.length; i++) { 
         
+    }
+
+    if (gameTurnCounter === 9 && gameState === 'READY') {
+        gameMessage = 'Game ended in a draw.';
+        gameState = 'END';
     }
 
     // Player 1 Left to right
