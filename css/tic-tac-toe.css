@@ -22,4 +22,15 @@ h1 {
     margin: 0 auto;
     text-align: center;
     background-color: white;
+    border-radius: 1em;
+}
+
+#reset {
+    width: 64px;
+    margin: 2em auto;
+    display: block;
+}
+
+#message {
+    text-align: center;
 }

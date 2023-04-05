@@ -1,110 +1,130 @@
-let currentTurn = "PLAYER1";
-let turnCounter = 0; //currently no functionality
+// Game Variables
+let gameState = 'READY';
+let gameCurrentTurn = 'PLAYER1';
+let gameOpponest = 'PLAYER2';
+let gameTurnCounter = 0; //currently no functionality
+let gameMessage = '';
+let gameGrid = [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', '']
+];
 
-const resetGame = function () {
-    $('.square').html('');
-    turnCounter = 0;
-}
-
-const placeInput = function (event) {
-    const squareDiv = event.target;
-    console.log(squareDiv);
-
-    if (currentTurn === "PLAYER1") {
-        if ($(squareDiv).html() != 'x' && $(squareDiv).html() != 'o') {
-            $(squareDiv).html('x');
-            currentTurn = "PLAYER2"; //can be changed to AI if playing against AI
-            turnCounter++;
-        }
-        return;
-    }
-
-    else if (currentTurn === "PLAYER2") {
-        if ($(squareDiv).html() != 'x' && $(squareDiv).html() != 'o') {
-            $(squareDiv).html('o');
-            currentTurn = "PLAYER1";
-            turnCounter++;
-
+// Clears the grid by looping through each element, setting the value.
+const initialiseGrid = function () {
+    for (let i = 0; i < gameGrid.length; i++) {
+        for (let j = 0; j < gameGrid[i].length; j++) {
+            gameGrid[i][j] = '';
         }
     }
 
-    else if (currentTurn === "AI") {
-        $(squareDiv).html('o');
-        currentTurn = "PLAYER1";
-        turnCounter++;
-    }
-}
+    // Changes gameState to play in the case gameState-END was achieved, also update message
+    gameState = 'READY';
+    gameMessage = 'Decide who PLAYER 1 will be and click on a field to make a decision and start the game.';
+};
 
-const checkResult = function () {
-    //player 1 win
-    //left to right
-    if ($('#top-left').html() === 'x' && $('#top-middle').html() === 'x' && $('#top-right').html() === 'x') {
-        alert("P1 Wins");
-    }
-    if ($('#middle-left').html() === 'x' && $('#middle-middle').html() === 'x' && $('#middle-right').html() === 'x') {
-        alert("P1 Wins");
-    }
-    if ($('#bottom-left').html() === 'x' && $('#bottom-middle').html() === 'x' && $('#bottom-right').html() === 'x') {
-        alert("P1 Wins");
-    }
+// Updates gameGrid nested array with input based on current turn, the ID of the clicked button is parsed in (which refers to it's relevant array position)
+const gameInput = function (gridLocation) {
+    const row = gridLocation[0];
+    const col = gridLocation[2];
 
-    //top to bottom
-    if ($('#top-left').html() === 'x' && $('#middle-left').html() === 'x' && $('#bottom-left').html() === 'x') {
-        alert("P1 Wins");
-    }
-    if ($('#top-middle').html() === 'x' && $('#middle-middle').html() === 'x' && $('#bottom-middle').html() === 'x') {
-        alert("P1 Wins");
-    }
-    if ($('#top-right').html() === 'x' && $('#middle-right').html() === 'x' && $('#bottom-right').html() === 'x') {
-        alert("P1 Wins");
+    // If array element is empty and game is active
+    if (!gameGrid[row][col] && gameState === 'READY') {
+        if (gameCurrentTurn === 'PLAYER1') {
+            gameGrid[row][col] = 'x';
+            gameCurrentTurn = 'PLAYER2';
+            gameMessage = 'PLAYER 2, you know what to do!';
+        } else {
+            gameGrid[row][col] = 'o';
+            gameCurrentTurn = 'PLAYER1';
+            gameMessage = 'PLAYER 1, have some fun!';
+        }
     }
 
-    //diagonal
-    if ($('#top-left').html() === 'x' && $('#middle-middle').html() === 'x' && $('#bottom-right').html() === 'x') {
-        alert("P1 Wins");
-    }
-    if ($('#top-right').html() === 'x' && $('#middle-middle').html() === 'x' && $('#bottom-left').html() === 'x') {
-        alert("P1 Wins");
+    checkWin();
+};
+
+// Checks the game grid for winning combinations
+const checkWin = function () {
+    
+    // *** UNDER CONSTRUCTION ***
+    for (let i = 0; i <= gameGrid.length; i++) { 
+        
     }
 
-    //player 2 win
-    //left to right
-    if ($('#top-left').html() === 'o' && $('#top-middle').html() === 'o' && $('#top-right').html() === 'o') {
-        alert("P2 Wins");
+    // Player 1 Left to right
+    if (gameGrid[0][0] === 'x' && gameGrid[0][1] === 'x' && gameGrid[0][2] === 'x') {
+        gameMessage = 'P1 Wins';
+        gameState = 'END'
     }
-    if ($('#middle-left').html() === 'o' && $('#middle-middle').html() === 'o' && $('#middle-right').html() === 'o') {
-        alert("P2 Wins");
+    if (gameGrid[1][0] === 'x' && gameGrid[1][1] === 'x' && gameGrid[1][2] === 'x') {
+        gameMessage = 'P1 Wins';
+        gameState = 'END'
     }
-    if ($('#bottom-left').html() === 'o' && $('#bottom-middle').html() === 'o' && $('#bottom-right').html() === 'o') {
-        alert("P2 Wins");
-    }
-
-    //top to bottom
-    if ($('#top-left').html() === 'o' && $('#middle-left').html() === 'o' && $('#bottom-left').html() === 'o') {
-        alert("P2 Wins");
-    }
-    if ($('#top-middle').html() === 'o' && $('#middle-middle').html() === 'o' && $('#bottom-middle').html() === 'o') {
-        alert("P2 Wins");
-    }
-    if ($('#top-right').html() === 'o' && $('#middle-right').html() === 'o' && $('#bottom-right').html() === 'o') {
-        alert("P2 Wins");
+    if (gameGrid[2][0] === 'x' && gameGrid[2][1] === 'x' && gameGrid[2][2] === 'x') {
+        gameMessage = 'P1 Wins';
+        gameState = 'END'
     }
 
-    //diagonal
-    if ($('#top-left').html() === 'o' && $('#middle-middle').html() === 'o' && $('#bottom-right').html() === 'o') {
-        alert("P2 Wins");
+    // Player 1 Top to bottom
+    if (gameGrid[0][0] === 'x' && gameGrid[1][0] === 'x' && gameGrid[2][0] === 'x') {
+        gameMessage = 'P1 Wins';
+        gameState = 'END';
     }
-    if ($('#top-right').html() === 'o' && $('#middle-middle').html() === 'o' && $('#bottom-left').html() === 'o') {
-        alert("P2 Wins");
+    if (gameGrid[0][1] === 'x' && gameGrid[1][1] === 'x' && gameGrid[2][1] === 'x') {
+        gameMessage = 'P1 Wins';
+        gameState = 'END';
     }
-}
+    if (gameGrid[0][2] === 'x' && gameGrid[1][2] === 'x' && gameGrid[2][2] === 'x') {
+        gameMessage = 'P1 Wins';
+        gameState = 'END';
+    }
 
-$(document).ready( function () {
+    // Player 1 Diagonals
+    if (gameGrid[0][0] === 'x' && gameGrid[1][1] === 'x' && gameGrid[2][2] === 'x') {
+        gameMessage = 'P1 Wins';
+        gameState = 'END';
+    }
+    if (gameGrid[0][2] === 'x' && gameGrid[1][1] === 'x' && gameGrid[2][0] === 'x') {
+        gameMessage = 'P1 Wins';
+        gameState = 'END';
+    }
 
-    $('.square').on('click', function (event) {
-        placeInput(event);
-        checkResult();
-    });
+    // Player 2 Left to right
+    if (gameGrid[0][0] === 'o' && gameGrid[0][1] === 'o' && gameGrid[0][2] === 'o') {
+        gameMessage = 'P2 Wins';
+        gameState = 'END';
+    }
+    if (gameGrid[1][0] === 'o' && gameGrid[1][1] === 'o' && gameGrid[1][2] === 'o') {
+        gameMessage = 'P2 Wins';
+        gameState = 'END';
+    }
+    if (gameGrid[2][0] === 'o' && gameGrid[2][1] === 'o' && gameGrid[2][2] === 'o') {
+        gameMessage = 'P2 Wins';
+        gameState = 'END';
+    }
 
-    $('#reset').on('click', resetGame);
-});
+    // Player 2 Top to bottom
+    if (gameGrid[0][0] === 'o' && gameGrid[1][0] === 'o' && gameGrid[2][0] === 'o') {
+        gameMessage = 'P2 Wins';
+        gameState = 'END';
+    }
+    if (gameGrid[0][1] === 'o' && gameGrid[1][1] === 'o' && gameGrid[2][1] === 'o') {
+        gameMessage = 'P2 Wins';
+        gameState = 'END';
+    }
+    if (gameGrid[0][2] === 'o' && gameGrid[1][2] === 'o' && gameGrid[2][2] === 'o') {
+        gameMessage = 'P2 Wins';
+        gameState = 'END';
+    }
+
+    // Player 2 Diagonals
+    if (gameGrid[0][0] === 'o' && gameGrid[1][1] === 'o' && gameGrid[2][2] === 'o') {
+        gameMessage = 'P2 Wins';
+        gameState = 'END';
+    }
+    if (gameGrid[0][2] === 'o' && gameGrid[1][1] === 'o' && gameGrid[2][0] === 'o') {
+        gameMessage = 'P2 Wins';
+        gameState = 'END';
+    }
+};
