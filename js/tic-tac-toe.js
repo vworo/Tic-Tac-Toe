@@ -2,7 +2,7 @@
 let gameState = 'READY';
 let gameCurrentTurn = 'PLAYER1';
 let gameOpponest = 'PLAYER2';
-let gameTurnCounter = 0; //currently no functionality
+let gameTurnCounter = 0;
 let gameMessage = '';
 let gameGrid = [
     ['', '', ''],
@@ -50,9 +50,11 @@ const gameInput = function (gridLocation) {
 const checkWin = function () {
     
     // *** UNDER CONSTRUCTION ***
-    for (let i = 0; i <= gameGrid.length; i++) { 
-        
-    }
+    // for (let row = 0; row <= gameGrid.length; row++) { 
+    //     for (let col = 0; col < gameGrid[row].length; col++) {
+
+    //     }
+    // }
 
     if (gameTurnCounter === 9 && gameState === 'READY') {
         gameMessage = 'Game ended in a draw.';
