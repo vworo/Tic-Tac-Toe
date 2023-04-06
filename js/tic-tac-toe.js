@@ -18,9 +18,11 @@ const initialiseGrid = function () {
         }
     }
 
-    // Changes gameState to play in the case gameState-END was achieved, also update message
+    // Reset all game variables
     gameState = 'READY';
+    gameCurrentTurn = 'PLAYER1';
     gameMessage = 'Decide who PLAYER 1 will be and click on a field to make a decision and start the game.';
+    gameTurnCounter = 0;
 };
 
 // Updates gameGrid nested array with input based on current turn, the ID of the clicked button is parsed in (which refers to it's relevant array position)
