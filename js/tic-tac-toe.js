@@ -1,4 +1,6 @@
 // Game Variables
+const gameWinMessages = ['Player 1 Wins!', 'Player 2 Wins!'];
+
 let gameState = 'READY';
 let gameCurrentTurn = 'PLAYER1';
 let gameOpponest = 'PLAYER2';
@@ -9,9 +11,32 @@ let gameGrid = [
     ['', '', ''],
     ['', '', '']
 ];
+ 
+// Test for bigger grid sizes 
+// let gameGrid = [
+//     ['', '', '', ''],
+//     ['', '', '', ''],
+//     ['', '', '', ''],
+//     ['', '', '', '']
+// ];
 
-// Clears the grid by looping through each element, setting the value.
+// let gameGrid = [
+//     ['', '', '', '', ''],
+//     ['', '', '', '', ''],
+//     ['', '', '', '', ''],
+//     ['', '', '', '', ''],
+//     ['', '', '', '' ,'']
+// ];
+
+// Returns number of elements in the grid (assumes the grid is a square)
+const getTotalElements = function () {
+    return gameGrid.length * gameGrid[0].length;
+}
+
+// Clears the grid and sets all game variables to beginning values
 const initialiseGrid = function () {
+
+    // Clears the grid by looping through each element, setting the value to nothing.
     for (let i = 0; i < gameGrid.length; i++) {
         for (let j = 0; j < gameGrid[i].length; j++) {
             gameGrid[i][j] = '';
@@ -48,94 +73,108 @@ const gameInput = function (gridLocation) {
     checkWin();
 };
 
-// Checks the game grid for winning combinations
+// Check row matches - currently dynamic
+const checkRows = function (char) {
+
+    // Loop through rows
+    for (let row = 0; row < gameGrid.length; row++) { 
+
+        // Variable to keep track of all matches in the current row
+        let matchingElementsInRow = 0;
+
+        // Check row matches
+        for (let col = 0; col < gameGrid[row].length; col++) {
+            if (gameGrid[row][col] === char) {
+                matchingElementsInRow++;
+            }
+        }
+
+        // Return true if there was matching elements along the whole row
+        if (matchingElementsInRow === gameGrid[row].length) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// Check column matches - currently dynamic
+const checkColumns = function (char) {
+
+    // Loop through columns
+    for (let col = 0; col < gameGrid.length; col++) {
+
+        // Variable to keep track of matches
+        let matchingElementsInCol = 0;
+
+        // Loop through each row of each column
+        for (let row = 0; row < gameGrid.length; row++) { 
+
+            // Check column matches
+            if (gameGrid[row][col] === char) {
+                matchingElementsInCol++;
+            }
+
+            // Return true if there was matching elements down the column
+            if (matchingElementsInCol === gameGrid.length) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+// Check diagonals matches - currently dynamic
+const checkDiagonals = function (char) {
+
+    // Variables for diagonal/reverse diagonal matches
+    let diagonalIterator = 0;
+    let diagonalReverseIterator = gameGrid.length - 1;
+    let matchingElementsDiagonal = 0;
+    let matchingElementsReverseDiagonal = 0;
+
+    // Loop through rows
+    for (let row = 0; row < gameGrid.length; row++) { 
+
+        // Handle forward diagonal matches
+        if (gameGrid[row][diagonalIterator] === char) {
+            matchingElementsDiagonal++;
+        }
+
+        // Handle reverse diagonal matches
+        if (gameGrid[row][diagonalReverseIterator] === char) {
+            matchingElementsReverseDiagonal++;
+        }
+
+        // Adjust diagonal iterators
+        diagonalIterator++;
+        diagonalReverseIterator--;
+
+        // Return true if there was matches diagonally, based on array size
+        if (matchingElementsDiagonal === gameGrid.length || matchingElementsReverseDiagonal === gameGrid.length) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// Checks the game grid for winning combinations, draws if none
 const checkWin = function () {
-    
-    // *** UNDER CONSTRUCTION ***
-    // for (let row = 0; row <= gameGrid.length; row++) { 
-    //     for (let col = 0; col < gameGrid[row].length; col++) {
 
-    //     }
-    // }
+    // Check matches for each player
+    if (checkRows('x') || checkColumns('x') || checkDiagonals('x')) {
+        gameMessage = gameWinMessages[0];
+        gameState = 'END';
+    } else if (checkRows('o') || checkColumns('o') || checkDiagonals('o')) {
+        gameMessage = gameWinMessages[1];
+        gameState = 'END';
+    }
 
-    if (gameTurnCounter === 9 && gameState === 'READY') {
+    // If no one won, draw game
+    if (gameTurnCounter === getTotalElements() && gameState === 'READY') {
         gameMessage = 'Game ended in a draw.';
-        gameState = 'END';
-    }
-
-    // Player 1 Left to right
-    if (gameGrid[0][0] === 'x' && gameGrid[0][1] === 'x' && gameGrid[0][2] === 'x') {
-        gameMessage = 'P1 Wins';
-        gameState = 'END'
-    }
-    if (gameGrid[1][0] === 'x' && gameGrid[1][1] === 'x' && gameGrid[1][2] === 'x') {
-        gameMessage = 'P1 Wins';
-        gameState = 'END'
-    }
-    if (gameGrid[2][0] === 'x' && gameGrid[2][1] === 'x' && gameGrid[2][2] === 'x') {
-        gameMessage = 'P1 Wins';
-        gameState = 'END'
-    }
-
-    // Player 1 Top to bottom
-    if (gameGrid[0][0] === 'x' && gameGrid[1][0] === 'x' && gameGrid[2][0] === 'x') {
-        gameMessage = 'P1 Wins';
-        gameState = 'END';
-    }
-    if (gameGrid[0][1] === 'x' && gameGrid[1][1] === 'x' && gameGrid[2][1] === 'x') {
-        gameMessage = 'P1 Wins';
-        gameState = 'END';
-    }
-    if (gameGrid[0][2] === 'x' && gameGrid[1][2] === 'x' && gameGrid[2][2] === 'x') {
-        gameMessage = 'P1 Wins';
-        gameState = 'END';
-    }
-
-    // Player 1 Diagonals
-    if (gameGrid[0][0] === 'x' && gameGrid[1][1] === 'x' && gameGrid[2][2] === 'x') {
-        gameMessage = 'P1 Wins';
-        gameState = 'END';
-    }
-    if (gameGrid[0][2] === 'x' && gameGrid[1][1] === 'x' && gameGrid[2][0] === 'x') {
-        gameMessage = 'P1 Wins';
-        gameState = 'END';
-    }
-
-    // Player 2 Left to right
-    if (gameGrid[0][0] === 'o' && gameGrid[0][1] === 'o' && gameGrid[0][2] === 'o') {
-        gameMessage = 'P2 Wins';
-        gameState = 'END';
-    }
-    if (gameGrid[1][0] === 'o' && gameGrid[1][1] === 'o' && gameGrid[1][2] === 'o') {
-        gameMessage = 'P2 Wins';
-        gameState = 'END';
-    }
-    if (gameGrid[2][0] === 'o' && gameGrid[2][1] === 'o' && gameGrid[2][2] === 'o') {
-        gameMessage = 'P2 Wins';
-        gameState = 'END';
-    }
-
-    // Player 2 Top to bottom
-    if (gameGrid[0][0] === 'o' && gameGrid[1][0] === 'o' && gameGrid[2][0] === 'o') {
-        gameMessage = 'P2 Wins';
-        gameState = 'END';
-    }
-    if (gameGrid[0][1] === 'o' && gameGrid[1][1] === 'o' && gameGrid[2][1] === 'o') {
-        gameMessage = 'P2 Wins';
-        gameState = 'END';
-    }
-    if (gameGrid[0][2] === 'o' && gameGrid[1][2] === 'o' && gameGrid[2][2] === 'o') {
-        gameMessage = 'P2 Wins';
-        gameState = 'END';
-    }
-
-    // Player 2 Diagonals
-    if (gameGrid[0][0] === 'o' && gameGrid[1][1] === 'o' && gameGrid[2][2] === 'o') {
-        gameMessage = 'P2 Wins';
-        gameState = 'END';
-    }
-    if (gameGrid[0][2] === 'o' && gameGrid[1][1] === 'o' && gameGrid[2][0] === 'o') {
-        gameMessage = 'P2 Wins';
         gameState = 'END';
     }
 };

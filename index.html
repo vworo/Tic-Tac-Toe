@@ -13,28 +13,83 @@
 <body> 
     <div class="container">
     <h1>Tic Tac Toe</h1>
-        <div class="grid">
-            <div class="square top left" 
-                    id="0-0"></div>
-            <div class="square top" 
-                    id="0-1"></div>
-            <div class="square top right" 
-                    id="0-2"></div>
-            <div class="square middle left" 
-                    id="1-0"></div>
-            <div class="square middle" 
-                    id="1-1"></div>
-            <div class="square middle right" 
-                    id="1-2"></div>
-            <div class="square bottom left" 
-                    id="2-0"></div>
-            <div class="square bottom" 
-                    id="2-1"></div>
-            <div class="square bottom right" 
-                    id="2-2"></div>
+    <p id="message"></p>
+
+        <!-- Grid to be dynamically built via DOM, based on gameGrid array (eventually) -->
+        <!-- 3 x 3 grid -->
+        <div class="grid3x3 grid">
+            <div class="square top left"        id="0-0"></div>
+            <div class="square top"             id="0-1"></div>
+            <div class="square top right"       id="0-2"></div>
+            <div class="square middle left"     id="1-0"></div>
+            <div class="square middle"          id="1-1"></div>
+            <div class="square middle right"    id="1-2"></div>
+            <div class="square bottom left"     id="2-0"></div>
+            <div class="square bottom"          id="2-1"></div>
+            <div class="square bottom right"    id="2-2"></div>
+        </div>
+        
+        <!-- 4 x 4 grid -->
+        <div class="grid4x4 grid">
+            <div class="square top left"        id="0-0"></div>
+            <div class="square top"             id="0-1"></div>
+            <div class="square top right"       id="0-2"></div>
+            <div class="square top right"       id="0-3"></div>
+            <div class="square middle left"     id="1-0"></div>
+            <div class="square middle"          id="1-1"></div>
+            <div class="square middle right"    id="1-2"></div>
+            <div class="square middle right"    id="1-3"></div>
+            <div class="square bottom left"     id="2-0"></div>
+            <div class="square bottom"          id="2-1"></div>
+            <div class="square bottom right"    id="2-2"></div>
+            <div class="square bottom right"    id="2-3"></div>
+            <div class="square bottom left"     id="3-0"></div>
+            <div class="square bottom"          id="3-1"></div>
+            <div class="square bottom right"    id="3-2"></div>
+            <div class="square bottom right"    id="3-3"></div>
+        </div>
+
+        <!-- 5 x 5 grid -->
+        <div class="grid5x5 grid">
+            <div class="square top left"        id="0-0"></div>
+            <div class="square top"             id="0-1"></div>
+            <div class="square top right"       id="0-2"></div>
+            <div class="square top right"       id="0-3"></div>
+            <div class="square top right"       id="0-4"></div>
+            <div class="square middle left"     id="1-0"></div>
+            <div class="square middle"          id="1-1"></div>
+            <div class="square middle right"    id="1-2"></div>
+            <div class="square middle right"    id="1-3"></div>
+            <div class="square middle right"    id="1-4"></div>
+            <div class="square bottom left"     id="2-0"></div>
+            <div class="square bottom"          id="2-1"></div>
+            <div class="square bottom right"    id="2-2"></div>
+            <div class="square bottom right"    id="2-3"></div>
+            <div class="square bottom right"    id="2-4"></div>
+            <div class="square bottom left"     id="3-0"></div>
+            <div class="square bottom"          id="3-1"></div>
+            <div class="square bottom right"    id="3-2"></div>
+            <div class="square bottom right"    id="3-3"></div>
+            <div class="square bottom right"    id="3-4"></div>
+            <div class="square bottom left"     id="4-0"></div>
+            <div class="square bottom"          id="4-1"></div>
+            <div class="square bottom right"    id="4-2"></div>
+            <div class="square bottom right"    id="4-3"></div>
+            <div class="square bottom right"    id="4-4"></div>
+        </div>
+
+        <div class="overlay">
+            <div class="window">
+                <h2>Settings</h2>
+                <h3>Grid size:</h3>
+                <button id="button3x3">3 x 3</button>
+                <button id="button4x4">4 x 4</button>
+                <button id="button5x5">5 x 5</button>
+                <button id="back">Close</button>
+            </div>
         </div>
         <button id="reset">Reset game</button>
-        <p id="message"></p>
+        <button id="settings">Settings</button>
     </div>
 </body>
 </html>

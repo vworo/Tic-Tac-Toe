@@ -1,59 +1,25 @@
-# Markdown Intro
+# Tic Tac Toe
 
-Markdown is an alternative to HTML (not a substitute).
+A computer recreation of the famous 'Tic Tac Toe' game. Player 1 is assigned 'x' and will always go first in a game.
 
-The name is a dumb joke -- HTML is markUP language, this is markDOWN language.
+## Planned features:
 
-It is intended to be human readable that can also produce HTML.
+- Custom player portraits, grid and background images
+- AI of various levels
+- Win counter
+- Menu page
 
-# Headings
+## Libraries used:
 
-Also Headings
-================
+- jQuery v3.6.4
 
-## Subheading
+## Fonts used:
 
-Also subheading
-----------------
+- 'Source Code Pro' - imported from Google Fonts
+- Default font is Monospace if above font is not loaded.
 
-### Sub sub heading
+## Special thanks to:
 
-## Emphasis
-
-You can make words *italic* or **bold**
-
-This is for very ***special*** text.
-
-Underscores will also ___work___.
-
-## Lists
-
-* Groucho
-* Harpo
-* Chico
-
-### Numbered Lists
-
-1. Groucho
-2. Harpo
-3. Chico
-
-## Links
-
-This is [a link to the W3C](http://www.w3c.org/).
-
-## Images
-
-![a fluffy kitten](http://www.placekitten.com/50/60)
-
-## Code FOrmatting 
-
-The jQuery library uses the `$` variable. This is the `monospace` font. Have you tried `console.log`.
-
-Here is an example of a function in JS:
-
-``` javascript
-const thingy = function () {
-    console.log("hi");
-}
-```
+- **Google** for helping me find the relevant resources that made this work
+- **Google fonts** for delivering the goods when it comes to making letters look cool
+- **Me** for not using chatGPT (although it would probably help me build more efficient code)
