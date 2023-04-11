@@ -11,22 +11,6 @@ let gameGrid = [
     ['', '', ''],
     ['', '', '']
 ];
- 
-// Test for bigger grid sizes 
-// let gameGrid = [
-//     ['', '', '', ''],
-//     ['', '', '', ''],
-//     ['', '', '', ''],
-//     ['', '', '', '']
-// ];
-
-// let gameGrid = [
-//     ['', '', '', '', ''],
-//     ['', '', '', '', ''],
-//     ['', '', '', '', ''],
-//     ['', '', '', '', ''],
-//     ['', '', '', '' ,'']
-// ];
 
 // Returns number of elements in the grid (assumes the grid is a square)
 const getTotalElements = function () {

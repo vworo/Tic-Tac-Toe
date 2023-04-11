@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-A computer recreation of the famous 'Tic Tac Toe' game. Player 1 is assigned 'x' and will always go first in a game.
+A computer recreation of the famous 'Tic Tac Toe' game. Player 1 is assigned 'x' and will always go first in a game. Click 'Settings' to change grid size.
 
 ## Planned features:
 
