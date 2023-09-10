@@ -3,7 +3,7 @@
 A computer recreation of the famous 'Tic Tac Toe' game. Player 1 is assigned 'x' and will always go first in a game. Click 'Settings' to change grid size.
 
 ## Game Link:
-- [Tic Tac Toe](https://vworo.github.io/Project-0/)
+- [Tic Tac Toe](https://vworo.github.io/Tic-Tac-Toe/)
 
 ## Planned features:
 
